@@ -14,16 +14,16 @@ public class Card {//opens class
 	}//close constructor
 	
 	
-	public String getSuit() {
+	public String getSuit() {//opens getSuit()
 		
 		return suit;
 		
-	}
+	}//close getSuit()
 	
-	public String getFace() {
+	public String getFace() {//open getFace()
 		
 		return face;
 		
-	}
+	}//close getFace()
 	
 }//close class
