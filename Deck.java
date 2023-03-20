@@ -13,7 +13,7 @@ public class Deck {// opens class
 
 	private static Card[] deck = new Card[52];
 
-	String[] suits = { "Hearts", "Diamonds", "Spades", "Clubs" };
+	String[] suits = { "Diamonds", "Hearts", "Spades", "Clubs" };
 	String[] face = { "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen",
 			"King"};
 
