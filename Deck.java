@@ -9,10 +9,9 @@
  *         9, 10, J, K, A.
  *
  */
-
 public class Deck {// opens class
 
-	Card[] deck = new Card[Constants.CardConstants.deckCount];
+	private static Card[] deck = new Card[52];
 
 	String[] suits = { "Hearts", "Diamonds", "Spades", "Clubs" };
 	String[] face = { "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen",
@@ -27,14 +26,14 @@ public class Deck {// opens class
 
 		int i = 0;
 
-		for (int j = 0; j < Constants.CardConstants.suitCount; j++) {// go through each suit
+		for (int j = 0; j < 4; j++) {// go through each suit
 
 			// System.out.println("I am gathering "+suits[j]);
 			s = suits[j];
 
-			for (int k = 0; k < (Constants.CardConstants.deckCount/Constants.CardConstants.suitCount); k++) {// go through each card value
+			for (int k = 0; k < 13; k++) {// go through each card value
 				// System.out.println("ADDED "+face[k] +" to "+i);
-				deck[i] = new Card(suits[j], face[k]);
+				deck[i] = new Card(suits[j], face[k], j, k);
 				// System.out.println(" SUIT "+deck[i].getSuit());
 				i++;
 			} // each card value
@@ -43,12 +42,24 @@ public class Deck {// opens class
 
 		
 		//show all cards just for testing purposes
-		for (int x = 0; x < Constants.CardConstants.suitCount; x++) {
+		for (int x = 0; x < 52; x++) {
 
 			System.out.println("You have a " + deck[x].getFace() + " of " + deck[x].getSuit());
 
 		}
 
 	}// closes Deck()
+	
+	public static Card getCard(int a) {
+		return deck[a];
+		
+	}
+	
+	public Card[] getdeck() {
+		
+		return deck;
+		
+		
+	}
 
 }// closes class
