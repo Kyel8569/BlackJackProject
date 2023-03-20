@@ -56,6 +56,7 @@ public class Starter extends JFrame implements ActionListener {
 			DeckImage deckImage = new DeckImage();
 			BufferedImage cardImage = deckImage.getImage(x, y);
 			card.setIcon(new ImageIcon(cardImage));
+			System.out.println("You have a " + Deck.getCard(c).getFace() + " of " + Deck.getCard(c).getSuit());
 			c++;
 			if(c > test.getdeck().length -1) {
 				c = 0;
