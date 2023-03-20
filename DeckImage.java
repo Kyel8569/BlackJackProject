@@ -10,7 +10,7 @@ public class DeckImage {
 	static BufferedImage deckImage;
 
 	DeckImage() {
-		InputStream stream = getClass().getResourceAsStream("Cards.png");
+		InputStream stream = getClass().getResourceAsStream("cards.png");
 		try {
 			deckImage = ImageIO.read(stream);
 		} catch (IOException e) {
