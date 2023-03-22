@@ -14,19 +14,12 @@
 public class Deck {// opens class
 
 	private static Card[] deck = new Card[Constants.CardConstants.DECK_COUNT];
-
-	String[] suits = { "Hearts", "Diamonds", "Spades", "Clubs" };
-	String[] face = { "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen",
-			"King"};
-
 	/**
 	 * Creates a standard 52 card deck
 	 */
 	public Deck() {// opens Deck()
 
 		String s, f;
-
-		int i = 0;
 
 		for (int j = 0; j < Constants.CardConstants.SUIT_COUNT; j++) {// go through each suit
 
@@ -35,9 +28,8 @@ public class Deck {// opens class
 
 			for (int k = 0; k < (Constants.CardConstants.DECK_COUNT/Constants.CardConstants.SUIT_COUNT); k++) {// go through each card value
 				// System.out.println("ADDED "+face[k] +" to "+i);
-				deck[i] = new Card(Constants.CardConstants.SUITS[j], Constants.CardConstants.FACE[k]);
+				deck[k] = new Card(Constants.CardConstants.SUITS[j], Constants.CardConstants.FACE[k]);
 				// System.out.println(" SUIT "+deck[i].getSuit());
-				i++;
 			} // each card value
 
 		} // each suit
