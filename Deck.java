@@ -20,7 +20,7 @@ public class Deck {// opens class
 	static String[] suits = { "Diamonds", "Hearts", "Spades", "Clubs" };
 	static String[] face = { "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack",
 			"Queen", "King" };
-	static int[] values = {11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};//assigns cards their black jack value
+	static int[] values = {11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};//assigns cards their black jack 
 	//private int length;
 
 	/**

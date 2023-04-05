@@ -70,8 +70,8 @@ public class Game extends JFrame implements ActionListener {// opens class
 		hit.setText("Hit");
 		hit.setFocusable(false);
 		frame.add(hit);
-		hit.setVisible(false);
-		
+		hit.setVisible(false);//hehehehe
+		//•
 		stay.setBounds(100, 20, 100, 50);
 		stay.addActionListener(this);
 		stay.setText("Stay");

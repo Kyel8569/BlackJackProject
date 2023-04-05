@@ -11,7 +11,5 @@ public class Constants {
 	}
 	public static int getfaceCount() {
 		return faceCount;
-	}
-	
-	
+}
 }
