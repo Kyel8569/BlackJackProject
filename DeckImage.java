@@ -5,8 +5,8 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 public class DeckImage {
-	final int WIDTH = 51;
-	final int HEIGHT = 70;
+	final int WIDTH = 52;
+	final int HEIGHT = 72;
 	static BufferedImage deckImage;
 
 	DeckImage() {
