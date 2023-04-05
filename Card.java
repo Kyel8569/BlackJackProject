@@ -1,18 +1,19 @@
 public class Card {//opens class
 
-	private int rank;
+	private int value;
 	private String suit;
 	private String face;
 	private int x;
 	private int y;
 	
 	
-	public Card(String suitIn, String faceIn, int xIn, int yIn) {//open constructor
+	public Card(String suitIn, String faceIn, int xIn, int yIn, int valueIn) {//open constructor
 		
 		suit = suitIn;
 		face = faceIn;
 		x = xIn;
 		y = yIn;
+		value = valueIn;
 	}//close constructor
 	
 	
@@ -33,5 +34,8 @@ public class Card {//opens class
 	public int gety() {//get y
 		return y;
 	}//get y
+	public int getvalue() {//get value
+		return value;
+	}
 	
 }//close class

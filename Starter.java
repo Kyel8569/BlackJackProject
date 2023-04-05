@@ -35,9 +35,6 @@ public class Starter extends JFrame implements ActionListener {
 	
 	public Starter() {
 		
-		//System.out.println(Deck.getCard(20).gety());
-		//c = 30;
-		Deck.shuffle(10000);
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
@@ -50,10 +47,8 @@ public class Starter extends JFrame implements ActionListener {
 		frame.add(button);
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == button) {
-			Deck.shuffle(10000);
 			x = Deck.getCard(c).getx();
 			y = Deck.getCard(c).gety();
 			frame.getContentPane().add(card);
