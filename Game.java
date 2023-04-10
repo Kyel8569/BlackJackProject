@@ -101,14 +101,12 @@ public class Game extends JFrame implements ActionListener {// opens class
 		DeckImage deckImage = new DeckImage();
 		BufferedImage cardImage = deckImage.getImage(0, 15);
 		cardLabel1.setIcon(new ImageIcon(cardImage));
-/*
-		frame.getContentPane().add(DOneCover);
-		DeckImage deckImage1 = new DeckImage();
-		BufferedImage cardImage1 = deckImage1.getImage(0, 15);
-		DOneCover.setIcon(new ImageIcon(cardImage1));
-		DOneCover.setBounds(110, 111, 51, 70);
-		DOneCover.setVisible(false);
-*/
+		/*
+		 * frame.getContentPane().add(DOneCover); DeckImage deckImage1 = new
+		 * DeckImage(); BufferedImage cardImage1 = deckImage1.getImage(0, 15);
+		 * DOneCover.setIcon(new ImageIcon(cardImage1)); DOneCover.setBounds(110, 111,
+		 * 51, 70); DOneCover.setVisible(false);
+		 */
 	}// closes game
 
 	public void actionPerformed(ActionEvent e) {// opens action listener
@@ -120,32 +118,35 @@ public class Game extends JFrame implements ActionListener {// opens class
 			deal.setVisible(false);
 			DOneCover.setVisible(true);
 
-			c = (int) (Math.random() * 52);
+			//c = (int) (Math.random() * 52);
 			PCards(c);
+			c++;
 
-			c = (int) (Math.random() * 52);
+			//c = (int) (Math.random() * 52);
 			PCards(c);
-
-			c = (int) (Math.random() * 52);
+			c++;
+			
+			//c = (int) (Math.random() * 52);
 			DCards(c);
-
-			c = (int) (Math.random() * 52);
+			c++;
+			
+			//c = (int) (Math.random() * 52);
 			DCards(c);
-
+			c++;
+			
 		} // deal
 
 		if (e.getSource() == hit) {// hit
-
-			c = (int) (Math.random() * 52);
 			PCards(c);
-
-			c = (int) (Math.random() * 52);
-			DCards(c);
+			c++;
+			PDeck = new Card()
 
 		} // hit
 
 		if (e.getSource() == stay) {// stay
-
+			hit.setEnabled(false);
+			stay.setEnabled(false);
+			
 		} // stay
 
 	}// closes action listener
