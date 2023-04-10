@@ -10,7 +10,8 @@ import javax.swing.JLabel;
 public class Game extends JFrame implements ActionListener {// opens class
 
 	Deck deck = new Deck();
-
+	private static Card[] PDeck = new Card[Constants.getHCount()];
+	private static Card[] DDeck = new Card[Constants.getHCount()];
 	private JFrame frame;
 	JLabel DC1 = new JLabel("");
 	JLabel DC2 = new JLabel("");
@@ -47,7 +48,7 @@ public class Game extends JFrame implements ActionListener {// opens class
 	int DC = 0;
 	int xx = 111;
 	int yy = 211;
-	int XX = 212;
+	int XX = 110;
 	int YY = 111;
 
 	public static void main(String[] args) {// opens main
@@ -100,14 +101,14 @@ public class Game extends JFrame implements ActionListener {// opens class
 		DeckImage deckImage = new DeckImage();
 		BufferedImage cardImage = deckImage.getImage(0, 15);
 		cardLabel1.setIcon(new ImageIcon(cardImage));
-
+/*
 		frame.getContentPane().add(DOneCover);
 		DeckImage deckImage1 = new DeckImage();
 		BufferedImage cardImage1 = deckImage1.getImage(0, 15);
 		DOneCover.setIcon(new ImageIcon(cardImage1));
 		DOneCover.setBounds(110, 111, 51, 70);
 		DOneCover.setVisible(false);
-
+*/
 	}// closes game
 
 	public void actionPerformed(ActionEvent e) {// opens action listener
@@ -223,7 +224,7 @@ public class Game extends JFrame implements ActionListener {// opens class
 		}
 
 		else {
-			System.out.println("Error");
+			System.out.println("ERROR");
 		}
 	}
 
@@ -236,7 +237,8 @@ public class Game extends JFrame implements ActionListener {// opens class
 			DC++;
 			frame.getContentPane().add(DC1);
 			DC1.setIcon(new ImageIcon(cardImage));
-			DC1.setBounds(110, 111, 51, 70);
+			DC1.setBounds(XX, YY, 51, 70);
+			XX = XX + 51;
 		} else if (DC == 1) {
 			DC++;
 			frame.getContentPane().add(DC2);
@@ -295,6 +297,7 @@ public class Game extends JFrame implements ActionListener {// opens class
 			frame.getContentPane().add(DHit9);
 			DHit9.setIcon(new ImageIcon(cardImage));
 			DHit9.setBounds(XX, YY, 51, 70);
+			DC++;
 		} else {
 			System.out.println("ERROR");
 		}
