@@ -47,6 +47,8 @@ public class Game extends JFrame implements ActionListener {// opens class
 	int DC = 0;
 	int xx = 111;
 	int yy = 211;
+	int XX = 212;
+	int YY = 111;
 
 	public static void main(String[] args) {// opens main
 
@@ -118,33 +120,38 @@ public class Game extends JFrame implements ActionListener {// opens class
 			DOneCover.setVisible(true);
 
 			c = (int) (Math.random() * 52);
-			x = Deck.getCard(c).getx();
-			y = Deck.getCard(c).gety();
-			PCards(x, y);
+			PCards(c);
 
 			c = (int) (Math.random() * 52);
-			x = Deck.getCard(c).getx();
-			y = Deck.getCard(c).gety();
-			PCards(x, y);
+			PCards(c);
+
+			c = (int) (Math.random() * 52);
+			DCards(c);
+
+			c = (int) (Math.random() * 52);
+			DCards(c);
 
 		} // deal
-		
+
 		if (e.getSource() == hit) {// hit
-			
+
 			c = (int) (Math.random() * 52);
-			x = Deck.getCard(c).getx();
-			y = Deck.getCard(c).gety();
-			PCards(x, y);
-			
+			PCards(c);
+
+			c = (int) (Math.random() * 52);
+			DCards(c);
+
 		} // hit
-		
+
 		if (e.getSource() == stay) {// stay
 
 		} // stay
-		
+
 	}// closes action listener
 
-	private void PCards(int X, int Y) {
+	private void PCards(int C) {
+		int X = Deck.getCard(C).getx();
+		int Y = Deck.getCard(C).gety();
 		DeckImage deckImage = new DeckImage();
 		BufferedImage cardImage = deckImage.getImage(X, Y);
 		if (PC == 0) {
@@ -220,9 +227,78 @@ public class Game extends JFrame implements ActionListener {// opens class
 		}
 	}
 
-	private void DCards(int X, int Y) {
+	private void DCards(int C) {
+		int X = Deck.getCard(C).getx();
+		int Y = Deck.getCard(C).gety();
 		DeckImage deckImage = new DeckImage();
 		BufferedImage cardImage = deckImage.getImage(X, Y);
+		if (DC == 0) {
+			DC++;
+			frame.getContentPane().add(DC1);
+			DC1.setIcon(new ImageIcon(cardImage));
+			DC1.setBounds(110, 111, 51, 70);
+		} else if (DC == 1) {
+			DC++;
+			frame.getContentPane().add(DC2);
+			DC2.setIcon(new ImageIcon(cardImage));
+			DC2.setBounds(XX, YY, 51, 70);
+			XX = XX + 51;
+		} else if (DC == 2) {
+			DC++;
+			frame.getContentPane().add(DHit1);
+			DHit1.setIcon(new ImageIcon(cardImage));
+			DHit1.setBounds(XX, YY, 51, 70);
+			XX = XX + 51;
+		} else if (DC == 3) {
+			DC++;
+			frame.getContentPane().add(DHit2);
+			DHit2.setIcon(new ImageIcon(cardImage));
+			DHit2.setBounds(XX, YY, 51, 70);
+			XX = XX + 51;
+		} else if (DC == 4) {
+			DC++;
+			frame.getContentPane().add(DHit3);
+			DHit3.setIcon(new ImageIcon(cardImage));
+			DHit3.setBounds(XX, YY, 51, 70);
+			XX = XX + 51;
+		} else if (DC == 5) {
+			DC++;
+			frame.getContentPane().add(DHit4);
+			DHit4.setIcon(new ImageIcon(cardImage));
+			DHit4.setBounds(XX, YY, 51, 70);
+			XX = XX + 51;
+		} else if (DC == 6) {
+			DC++;
+			frame.getContentPane().add(DHit5);
+			DHit5.setIcon(new ImageIcon(cardImage));
+			DHit5.setBounds(XX, YY, 51, 70);
+			XX = XX + 51;
+		} else if (DC == 7) {
+			DC++;
+			frame.getContentPane().add(DHit6);
+			DHit6.setIcon(new ImageIcon(cardImage));
+			DHit6.setBounds(XX, YY, 51, 70);
+			XX = XX + 51;
+		} else if (DC == 8) {
+			DC++;
+			frame.getContentPane().add(DHit7);
+			DHit7.setIcon(new ImageIcon(cardImage));
+			DHit7.setBounds(XX, YY, 51, 70);
+			XX = XX + 51;
+		} else if (DC == 9) {
+			DC++;
+			frame.getContentPane().add(DHit8);
+			DHit8.setIcon(new ImageIcon(cardImage));
+			DHit8.setBounds(XX, YY, 51, 70);
+			XX = XX + 51;
+		} else if (DC == 10) {
+			frame.getContentPane().add(DHit9);
+			DHit9.setIcon(new ImageIcon(cardImage));
+			DHit9.setBounds(XX, YY, 51, 70);
+		} else {
+			System.out.println("ERROR");
+		}
+
 	}
 
 }// closes class
