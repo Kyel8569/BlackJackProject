@@ -10,8 +10,9 @@ import javax.swing.JLabel;
 public class Game extends JFrame implements ActionListener {// opens class
 
 	Deck deck = new Deck();
-	private static Card[] PDeck = new Card[Constants.getHCount()];
-	private static Card[] DDeck = new Card[Constants.getHCount()];
+	int PHand[] = new int[Constants.getHCount()];
+	int DHand[] = new int[Constants.getHCount()];
+
 	private JFrame frame;
 	JLabel DC1 = new JLabel("");
 	JLabel DC2 = new JLabel("");
@@ -42,7 +43,7 @@ public class Game extends JFrame implements ActionListener {// opens class
 	JButton deal = new JButton();
 	int x;
 	int y;
-	int c = 0;
+	static int c = 0;
 	int topCard = 0;
 	int PC = 0;
 	int DC = 0;
@@ -50,6 +51,8 @@ public class Game extends JFrame implements ActionListener {// opens class
 	int yy = 211;
 	int XX = 110;
 	int YY = 111;
+	int PScore = 0;
+	int DScore = 0;
 
 	public static void main(String[] args) {// opens main
 
@@ -118,40 +121,56 @@ public class Game extends JFrame implements ActionListener {// opens class
 			deal.setVisible(false);
 			DOneCover.setVisible(true);
 
-			//c = (int) (Math.random() * 52);
+			// c = (int) (Math.random() * 52);
+			// PH(c);
+			PCards(c);
+			c++;
+			// c = (int) (Math.random() * 52);
+			// PH(c);
 			PCards(c);
 			c++;
 
-			//c = (int) (Math.random() * 52);
-			PCards(c);
-			c++;
-			
-			//c = (int) (Math.random() * 52);
+			// c = (int) (Math.random() * 52);
+			// DH(c);
 			DCards(c);
 			c++;
-			
-			//c = (int) (Math.random() * 52);
+
+			// c = (int) (Math.random() * 52);
+			// DH(c);
 			DCards(c);
 			c++;
-			
+			// PScore = PScore(PC);
+			// DScore = DScore(DC);
+			/*
+			 * for (int i = 0; i < PC; i++) { System.out.println(PHand[i]); } for (int i =
+			 * 0; i < PC; i++) { System.out.println(DHand[i]); }
+			 */
 		} // deal
 
 		if (e.getSource() == hit) {// hit
+			// PH(c);
 			PCards(c);
 			c++;
-			PDeck = new Card()
+			if (PC == 11) {
+				hit.setEnabled(false);
+			}
 
 		} // hit
 
 		if (e.getSource() == stay) {// stay
 			hit.setEnabled(false);
 			stay.setEnabled(false);
-			
+
+			System.out.println("Player Score: " + PScore);
+			System.out.println("Dealer Score: " + DScore);
+
 		} // stay
 
 	}// closes action listener
 
 	private void PCards(int C) {
+		PHand[PC] = C;
+		PGetScore();
 		int X = Deck.getCard(C).getx();
 		int Y = Deck.getCard(C).gety();
 		DeckImage deckImage = new DeckImage();
@@ -230,6 +249,8 @@ public class Game extends JFrame implements ActionListener {// opens class
 	}
 
 	private void DCards(int C) {
+		DHand[DC] = C;
+		DGetScore();
 		int X = Deck.getCard(C).getx();
 		int Y = Deck.getCard(C).gety();
 		DeckImage deckImage = new DeckImage();
@@ -305,4 +326,29 @@ public class Game extends JFrame implements ActionListener {// opens class
 
 	}
 
+	private int PGetScore() {
+		int q = PHand[PC];
+		int s = Deck.getCard(q).getvalue();
+		PScore = PScore + s;
+		if (PScore > 21) {
+			System.out.println("ERROR");
+		}
+		return PScore;
+
+	}
+
+	private int DGetScore() {
+
+		int q = DHand[DC];
+		int s = Deck.getCard(q).getvalue();
+		DScore = DScore + s;
+
+		if (DScore > 21) {
+			System.out.println("ERROR");
+		}
+		return DScore;
+
+	}
+
 }// closes class
+
