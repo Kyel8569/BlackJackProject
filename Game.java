@@ -115,7 +115,8 @@ public class Game extends JFrame implements ActionListener {// opens class
 	public void actionPerformed(ActionEvent e) {// opens action listener
 
 		if (e.getSource() == deal) {// deal
-
+			PScore = 0;
+			DScore = 0;
 			stay.setVisible(true);
 			hit.setVisible(true);
 			deal.setVisible(false);
@@ -139,8 +140,6 @@ public class Game extends JFrame implements ActionListener {// opens class
 			// DH(c);
 			DCards(c);
 			c++;
-			// PScore = PScore(PC);
-			// DScore = DScore(DC);
 			/*
 			 * for (int i = 0; i < PC; i++) { System.out.println(PHand[i]); } for (int i =
 			 * 0; i < PC; i++) { System.out.println(DHand[i]); }
@@ -351,4 +350,3 @@ public class Game extends JFrame implements ActionListener {// opens class
 	}
 
 }// closes class
-
