@@ -36,6 +36,9 @@ public class Card {//opens class
 	}//get y
 	public int getvalue() {//get value
 		return value;
+	}//get value
+	public void setvalue(int newValue) {
+		value = newValue;
 	}
 	
 }//close class

@@ -36,7 +36,7 @@ public class Game extends JFrame implements ActionListener {// opens class
 	JLabel DHit7 = new JLabel("");
 	JLabel DHit8 = new JLabel("");
 	JLabel DHit9 = new JLabel("");
-	// JLabel Winner = new JLabel("");
+	JLabel Winner = new JLabel("");
 	JLabel DOneCover = new JLabel("");
 	JButton hit = new JButton();
 	JButton stay = new JButton();
@@ -53,6 +53,9 @@ public class Game extends JFrame implements ActionListener {// opens class
 	int YY = 111;
 	int PScore = 0;
 	int DScore = 0;
+	boolean stayOne = false;
+	boolean ace = false;
+	boolean DAce = false;
 
 	public static void main(String[] args) {// opens main
 
@@ -104,12 +107,14 @@ public class Game extends JFrame implements ActionListener {// opens class
 		DeckImage deckImage = new DeckImage();
 		BufferedImage cardImage = deckImage.getImage(0, 15);
 		cardLabel1.setIcon(new ImageIcon(cardImage));
-		/*
-		 * frame.getContentPane().add(DOneCover); DeckImage deckImage1 = new
-		 * DeckImage(); BufferedImage cardImage1 = deckImage1.getImage(0, 15);
-		 * DOneCover.setIcon(new ImageIcon(cardImage1)); DOneCover.setBounds(110, 111,
-		 * 51, 70); DOneCover.setVisible(false);
-		 */
+
+		frame.getContentPane().add(DOneCover);
+		DeckImage deckImage1 = new DeckImage();
+		BufferedImage cardImage1 = deckImage1.getImage(0, 15);
+		DOneCover.setIcon(new ImageIcon(cardImage1));
+		DOneCover.setBounds(XX, YY, 51, 70);
+		DOneCover.setVisible(false);
+
 	}// closes game
 
 	public void actionPerformed(ActionEvent e) {// opens action listener
@@ -122,28 +127,18 @@ public class Game extends JFrame implements ActionListener {// opens class
 			deal.setVisible(false);
 			DOneCover.setVisible(true);
 
-			// c = (int) (Math.random() * 52);
-			// PH(c);
-			PCards(c);
-			c++;
-			// c = (int) (Math.random() * 52);
-			// PH(c);
 			PCards(c);
 			c++;
 
-			// c = (int) (Math.random() * 52);
-			// DH(c);
+			PCards(c);
+			c++;
+
 			DCards(c);
 			c++;
 
-			// c = (int) (Math.random() * 52);
-			// DH(c);
 			DCards(c);
 			c++;
-			/*
-			 * for (int i = 0; i < PC; i++) { System.out.println(PHand[i]); } for (int i =
-			 * 0; i < PC; i++) { System.out.println(DHand[i]); }
-			 */
+
 		} // deal
 
 		if (e.getSource() == hit) {// hit
@@ -159,9 +154,18 @@ public class Game extends JFrame implements ActionListener {// opens class
 		if (e.getSource() == stay) {// stay
 			hit.setEnabled(false);
 			stay.setEnabled(false);
-
-			System.out.println("Player Score: " + PScore);
-			System.out.println("Dealer Score: " + DScore);
+			DOneCover.setVisible(false);
+			PScore();
+			stayOne = true;
+			while(DScore < 17) {
+				DCards(c);
+				c++;
+				if(DC == 11) {
+					System.out.println("ERROR Dealer hit");
+				}
+			}
+			DScore();
+			Winner(PScore, DScore);
 
 		} // stay
 
@@ -169,7 +173,10 @@ public class Game extends JFrame implements ActionListener {// opens class
 
 	private void PCards(int C) {
 		PHand[PC] = C;
-		PGetScore();
+		// edit
+		if (Deck.getCard(PHand[c]).getvalue() == 11) {
+			ace = true;
+		}
 		int X = Deck.getCard(C).getx();
 		int Y = Deck.getCard(C).gety();
 		DeckImage deckImage = new DeckImage();
@@ -245,11 +252,11 @@ public class Game extends JFrame implements ActionListener {// opens class
 		else {
 			System.out.println("ERROR");
 		}
+		PScore();
 	}
 
 	private void DCards(int C) {
 		DHand[DC] = C;
-		DGetScore();
 		int X = Deck.getCard(C).getx();
 		int Y = Deck.getCard(C).gety();
 		DeckImage deckImage = new DeckImage();
@@ -322,31 +329,96 @@ public class Game extends JFrame implements ActionListener {// opens class
 		} else {
 			System.out.println("ERROR");
 		}
-
-	}
-
-	private int PGetScore() {
-		int q = PHand[PC];
-		int s = Deck.getCard(q).getvalue();
-		PScore = PScore + s;
-		if (PScore > 21) {
-			System.out.println("ERROR");
+		if (Deck.getCard(DHand[C]).getvalue() == 11) {
+			DAce = true;
+			System.out.println(Deck.getCard(DHand[C]).getvalue()+" "+Deck.getCard(DHand[C]).getFace());
 		}
-		return PScore;
-
+		DScore();
 	}
 
-	private int DGetScore() {
-
-		int q = DHand[DC];
-		int s = Deck.getCard(q).getvalue();
-		DScore = DScore + s;
-
-		if (DScore > 21) {
-			System.out.println("ERROR");
+	private void PScore() {
+		int score = 0;
+		for (int i = 0; i < PC; i++) {
+			score = score + Deck.getCard(PHand[i]).getvalue();
+			// System.out.println(score);
+			PScore = score;
 		}
-		return DScore;
+		if (score > 21 && ace) {
+			// System.out.println(score);
+			aceCheck(PC);
+		}
+		// System.out.println(score);
 
 	}
+
+	private void DScore() {
+		int score = 0;
+		for (int i = 0; i < DC; i++) {
+			score = score + Deck.getCard(DHand[i]).getvalue();
+			// System.out.println(score);
+			DScore = score;
+		}
+		//System.out.println(DAce);
+		if (score > 21 && DAce) {
+			//System.out.println("Test");
+			aceCheck(DC);
+		}
+	}
+
+	private void aceCheck(int hand) {
+
+		if (!stayOne) {
+			// System.out.println("test");
+			for (int i = 0; i < hand; i++) {
+				int value = Deck.getCard(PHand[i]).getvalue();
+				if (value == 11) {
+					Deck.getCard(PHand[i]).setvalue(1);
+					ace = false;
+				}
+				ace = false;
+
+			}
+			PScore();
+		} else if (stayOne) {
+			//System.out.println("dealer ace test");
+			for (int i = 0; i < hand; i++) {
+				int value = Deck.getCard(DHand[i]).getvalue();
+				if (value == 11) {
+					Deck.getCard(DHand[i]).setvalue(1);
+					DAce = false;
+				}
+				DAce = false;
+			}
+			DScore();
+		}
+	}
+
+	private void Winner(int Player, int Dealer) {
+
+		if (Player > 21) {
+			System.out.println("Player Busts");
+		} else if (Dealer > 21) {
+			System.out.println("Dealer Busts");
+		} else if (Player > Dealer) {
+			System.out.println("Player Wins greater");
+		} else if (Dealer > Player) {
+			System.out.println("Dealer Wins greater");
+		}
+		if (Player == 21 && Dealer != 21) {
+			System.out.println("Player Wins 21");
+		} else if (Dealer == 21) {
+			System.out.println("Dealer Wins 21");
+		}
+		 System.out.println("Player Score: " + Player);
+		 System.out.println("Dealer Score: " + Dealer);
+	}
+
+	/*
+	 * private void Shuffle(int t){ Card temp; for(int q = 0; q < t; q++){
+	 * 
+	 * for(int l = Constants.getdeckCount() - 1; l >= 0; l--){ int rand = (int)
+	 * (Math.random() * Constants.getdeckCount()); temp = Deck.getCard(l); deck[l] =
+	 * deck[rand]; deck[rand] = temp; } } }
+	 */
 
 }// closes class
