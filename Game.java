@@ -37,6 +37,8 @@ public class Game extends JFrame implements ActionListener {// opens class
 	JLabel DHit8 = new JLabel("");
 	JLabel DHit9 = new JLabel("");
 	JLabel Winner = new JLabel("");
+	JLabel PS = new JLabel("");
+	JLabel DS = new JLabel("");
 	JLabel DOneCover = new JLabel("");
 	JButton hit = new JButton();
 	JButton stay = new JButton();
@@ -56,6 +58,7 @@ public class Game extends JFrame implements ActionListener {// opens class
 	boolean stayOne = false;
 	boolean ace = false;
 	boolean DAce = false;
+	boolean bust = false;
 
 	public static void main(String[] args) {// opens main
 
@@ -115,6 +118,16 @@ public class Game extends JFrame implements ActionListener {// opens class
 		DOneCover.setBounds(XX, YY, 51, 70);
 		DOneCover.setVisible(false);
 
+		Winner.setBounds(10, 300, 200, 15);
+		frame.add(Winner);
+		Winner.setVisible(false);
+		PS.setBounds(10, 320, 100, 15);
+		frame.add(PS);
+		PS.setVisible(false);
+		DS.setBounds(10, 340, 100, 15);
+		frame.add(DS);
+		DS.setVisible(false);
+
 	}// closes game
 
 	public void actionPerformed(ActionEvent e) {// opens action listener
@@ -148,6 +161,14 @@ public class Game extends JFrame implements ActionListener {// opens class
 			if (PC == 11) {
 				hit.setEnabled(false);
 			}
+			if (bust) {
+				hit.setEnabled(false);
+				stay.setEnabled(false);
+				DOneCover.setVisible(false);
+				PScore();
+				DScore();
+				Winner(PScore, DScore);
+			}
 
 		} // hit
 
@@ -157,10 +178,10 @@ public class Game extends JFrame implements ActionListener {// opens class
 			DOneCover.setVisible(false);
 			PScore();
 			stayOne = true;
-			while(DScore < 17) {
+			while (DScore < 17) {
 				DCards(c);
 				c++;
-				if(DC == 11) {
+				if (DC == 11) {
 					System.out.println("ERROR Dealer hit");
 				}
 			}
@@ -173,10 +194,6 @@ public class Game extends JFrame implements ActionListener {// opens class
 
 	private void PCards(int C) {
 		PHand[PC] = C;
-		// edit
-		if (Deck.getCard(PHand[c]).getvalue() == 11) {
-			ace = true;
-		}
 		int X = Deck.getCard(C).getx();
 		int Y = Deck.getCard(C).gety();
 		DeckImage deckImage = new DeckImage();
@@ -250,7 +267,7 @@ public class Game extends JFrame implements ActionListener {// opens class
 		}
 
 		else {
-			System.out.println("ERROR");
+			System.out.println("ERROR player card");
 		}
 		PScore();
 	}
@@ -327,11 +344,7 @@ public class Game extends JFrame implements ActionListener {// opens class
 			DHit9.setBounds(XX, YY, 51, 70);
 			DC++;
 		} else {
-			System.out.println("ERROR");
-		}
-		if (Deck.getCard(DHand[C]).getvalue() == 11) {
-			DAce = true;
-			System.out.println(Deck.getCard(DHand[C]).getvalue()+" "+Deck.getCard(DHand[C]).getFace());
+			System.out.println("ERROR dealer card");
 		}
 		DScore();
 	}
@@ -341,7 +354,13 @@ public class Game extends JFrame implements ActionListener {// opens class
 		for (int i = 0; i < PC; i++) {
 			score = score + Deck.getCard(PHand[i]).getvalue();
 			// System.out.println(score);
+			if (Deck.getCard(PHand[i]).getvalue() == 11) {
+				ace = true;
+			}
 			PScore = score;
+		}
+		if (score > 21 && !ace) {
+			bust = true;
 		}
 		if (score > 21 && ace) {
 			// System.out.println(score);
@@ -356,11 +375,16 @@ public class Game extends JFrame implements ActionListener {// opens class
 		for (int i = 0; i < DC; i++) {
 			score = score + Deck.getCard(DHand[i]).getvalue();
 			// System.out.println(score);
+			if (Deck.getCard(DHand[i]).getvalue() == 11) {
+				DAce = true;
+				// System.out.println(Deck.getCard(DHand[i]).getvalue()+"
+				// "+Deck.getCard(DHand[i]).getFace());
+			}
 			DScore = score;
 		}
-		//System.out.println(DAce);
+		// System.out.println(DAce);
 		if (score > 21 && DAce) {
-			//System.out.println("Test");
+			// System.out.println("Test");
 			aceCheck(DC);
 		}
 	}
@@ -380,7 +404,7 @@ public class Game extends JFrame implements ActionListener {// opens class
 			}
 			PScore();
 		} else if (stayOne) {
-			//System.out.println("dealer ace test");
+			// System.out.println("dealer ace test");
 			for (int i = 0; i < hand; i++) {
 				int value = Deck.getCard(DHand[i]).getvalue();
 				if (value == 11) {
@@ -395,22 +419,28 @@ public class Game extends JFrame implements ActionListener {// opens class
 
 	private void Winner(int Player, int Dealer) {
 
+		Winner.setVisible(true);
+		PS.setVisible(true);
+		DS.setVisible(true);
+		String win = null;
 		if (Player > 21) {
-			System.out.println("Player Busts");
+			win = "Player Busts";
 		} else if (Dealer > 21) {
-			System.out.println("Dealer Busts");
+			win = "Dealer Busts";
 		} else if (Player > Dealer) {
-			System.out.println("Player Wins greater");
+			win = "Player Wins greater";
 		} else if (Dealer > Player) {
-			System.out.println("Dealer Wins greater");
+			win = "Dealer Wins greater";
 		}
 		if (Player == 21 && Dealer != 21) {
-			System.out.println("Player Wins 21");
+			win = "Player Wins 21";
 		} else if (Dealer == 21) {
-			System.out.println("Dealer Wins 21");
+			win = "Dealer Wins 21";
 		}
-		 System.out.println("Player Score: " + Player);
-		 System.out.println("Dealer Score: " + Dealer);
+		PS.setText("Player Score: " + Player);
+		DS.setText("Dealer Score: " + Dealer);
+
+		Winner.setText(win);
 	}
 
 	/*
