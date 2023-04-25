@@ -1,74 +1,75 @@
-/**
- * 
- * @author jbutka
- *
- *         This class represents a deck of cards, specifically a standard 52
- *         card deck for the purposes of a single deck version of Black Jack
- *         (AKA 21). This will include cards for each suit: Hearts, Spades,
- *         Diamonds and Clubs. It will also include cards 2, 3, 4, 5, 6, 7, 8,
- *         9, 10, J, K, A.
- *
- */
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.lang.Math;
 
 public class Deck {// opens class
 
-	private static Card[] deck = new Card[Constants.getdeckCount()];
+	private static Card[] deck = new Card[52]; // standard 52 card deck
 
-	static String[] suits = { "Diamonds", "Hearts", "Spades", "Clubs" };
-	static String[] face = { "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack",
-			"Queen", "King" };
-	static int[] values = {11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};//assigns cards their black jack 
-	//private int length;
+	String[] suits = { "Diamonds", "Hearts", "Spades", "Clubs" };
 
-	/**
-	 * Creates a standard 52 card deck
-	 */
+	String[] face = { "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen",
+			"King" };
+	final int[] values = {11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
+
 	public Deck() {// opens Deck()
 
-		String s, f;
+		String s, f; // temp variables used to hold and populate deck. s = suits and f = face
 
 		int i = 0;
 
-		for (int j = 0; j < Constants.getsuitCount(); j++) {// go through each suit
+		for (int j = 0; j < 4; j++) {// opens SUIT for
 
-			// System.out.println("I am gathering "+suits[j]);
 			s = suits[j];
+			
+			for (int k = 0; k < 13; k++) {// opens FACE loop
 
-			for (int k = 0; k < Constants.getfaceCount(); k++) {// go through each card value
-				// System.out.println("ADDED "+face[k] +" to "+i);
-				
-				
 				deck[i] = new Card(suits[j], face[k], j, k, values[k]);
-				
-				
-				// System.out.println(" SUIT "+deck[i].getSuit());
-				i++;
-			} // each card value
 
-		} // each suit
-		/*
-		 * // show all cards just for testing purposes for (int x = 0; x < 52; x++) {
-		 * 
-		 * System.out.println("You have a " + deck[x].getFace() + " of " +
-		 * deck[x].getSuit());
-		 * 
-		 * }
-		 */
-	}// closes Deck()
+				i++;//egg
+
+			} // closes FACE loop
+
+		} // closes SUIT for loop
+		
+	
+		
+		shuffle(deck);
+		
+		for (int x = 0; x < 52; x++) {// opens for DECK
+
+		} // closes for DECK
+
+	}// close Deck()
 
 	public static Card getCard(int a) {
 		return deck[a];
-
 	}
 
 	public Card[] getdeck() {
 
 		return deck;
-
 	}
+	
+	public void shuffle(Card[] curDeck) {
 
+		int rand;//variable to hold random numbers generated via Math.rand()
+		Card temp;//variable to temporarily hold a card object
+
+		for(int i = curDeck.length - 1; i >=0; i--) {//for
+			
+			rand = (int) (Math.random() * curDeck.length);//generate a rand # 0-51
+			temp = curDeck[i];//temp is assigned the card at the current step
+			curDeck[i] = curDeck[rand];//card index at current step is replaced with the one at rand
+			curDeck[rand] = temp;//the rand spot is replaced by the card in temp
+			
+		}//for
+		
+		deck = curDeck;//place the shuffled cards back into the deck
+
+		for(Card d: deck) {
+			
+			//System.out.println(d.getFace()+" of "+d.getSuit());
+			
+		}
+	}
 
 }// closes class

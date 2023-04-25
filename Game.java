@@ -443,12 +443,4 @@ public class Game extends JFrame implements ActionListener {// opens class
 		Winner.setText(win);
 	}
 
-	/*
-	 * private void Shuffle(int t){ Card temp; for(int q = 0; q < t; q++){
-	 * 
-	 * for(int l = Constants.getdeckCount() - 1; l >= 0; l--){ int rand = (int)
-	 * (Math.random() * Constants.getdeckCount()); temp = Deck.getCard(l); deck[l] =
-	 * deck[rand]; deck[rand] = temp; } } }
-	 */
-
 }// closes class
