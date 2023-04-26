@@ -12,13 +12,13 @@ public class Deck {// opens class
 
 	public Deck() {// opens Deck()
 
-		String s, f; // temp variables used to hold and populate deck. s = suits and f = face
+		//String s, f; // temp variables used to hold and populate deck. s = suits and f = face
 
 		int i = 0;
 
 		for (int j = 0; j < 4; j++) {// opens SUIT for
 
-			s = suits[j];
+			//s = suits[j];
 			
 			for (int k = 0; k < 13; k++) {// opens FACE loop
 
@@ -65,11 +65,13 @@ public class Deck {// opens class
 		
 		deck = curDeck;//place the shuffled cards back into the deck
 
+		/*
 		for(Card d: deck) {
 			
-			//System.out.println(d.getFace()+" of "+d.getSuit());
+			System.out.println(d.getFace()+" of "+d.getSuit());
 			
 		}
+		*/
 	}
 
 }// closes class

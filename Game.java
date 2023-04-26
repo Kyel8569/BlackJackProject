@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+@SuppressWarnings("serial")
 public class Game extends JFrame implements ActionListener {// opens class
 
 	Deck deck = new Deck();
@@ -393,24 +394,32 @@ public class Game extends JFrame implements ActionListener {// opens class
 
 		if (!stayOne) {
 			// System.out.println("test");
+			// int score = 0;
 			for (int i = 0; i < hand; i++) {
 				int value = Deck.getCard(PHand[i]).getvalue();
+				// score = score + value;
+				// if(score > 21) {
 				if (value == 11) {
 					Deck.getCard(PHand[i]).setvalue(1);
 					ace = false;
 				}
+				// }
 				ace = false;
 
 			}
 			PScore();
 		} else if (stayOne) {
+			// int score = 0;
 			// System.out.println("dealer ace test");
 			for (int i = 0; i < hand; i++) {
 				int value = Deck.getCard(DHand[i]).getvalue();
+				// score = value + score;
+				// if(score > 21) {
 				if (value == 11) {
 					Deck.getCard(DHand[i]).setvalue(1);
 					DAce = false;
 				}
+				// }
 				DAce = false;
 			}
 			DScore();
