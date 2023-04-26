@@ -119,7 +119,7 @@ public class Game extends JFrame implements ActionListener {// opens class
 		DOneCover.setBounds(XX, YY, 51, 70);
 		DOneCover.setVisible(false);
 
-		Winner.setBounds(10, 300, 200, 15);
+		Winner.setBounds(10, 300, 400, 15);
 		frame.add(Winner);
 		Winner.setVisible(false);
 		PS.setBounds(10, 320, 100, 15);
@@ -140,16 +140,18 @@ public class Game extends JFrame implements ActionListener {// opens class
 			hit.setVisible(true);
 			deal.setVisible(false);
 			DOneCover.setVisible(true);
+			/*
+			 * max hand possible PCards(c); c++; PCards(c); c++; PCards(c); c += 11;
+			 * PCards(c); c++; PCards(c); c++; PCards(c); c += 11; PCards(c); c++;
+			 * PCards(c); c++; PCards(c); c += 11; PCards(c); c++; PCards(c); c++;
+			 */
 
 			PCards(c);
 			c++;
-
 			PCards(c);
 			c++;
-
 			DCards(c);
 			c++;
-
 			DCards(c);
 			c++;
 
@@ -157,11 +159,12 @@ public class Game extends JFrame implements ActionListener {// opens class
 
 		if (e.getSource() == hit) {// hit
 			// PH(c);
-			PCards(c);
-			c++;
+
 			if (PC == 11) {
 				hit.setEnabled(false);
 			}
+			PCards(c);
+			c++;
 			if (bust) {
 				hit.setEnabled(false);
 				stay.setEnabled(false);
@@ -391,37 +394,30 @@ public class Game extends JFrame implements ActionListener {// opens class
 	}
 
 	private void aceCheck(int hand) {
-
+		int i = 0;
 		if (!stayOne) {
-			// System.out.println("test");
-			// int score = 0;
-			for (int i = 0; i < hand; i++) {
+
+			while (i < hand && ace) {
 				int value = Deck.getCard(PHand[i]).getvalue();
-				// score = score + value;
-				// if(score > 21) {
 				if (value == 11) {
 					Deck.getCard(PHand[i]).setvalue(1);
 					ace = false;
 				}
-				// }
-				ace = false;
-
+				i++;
 			}
+			ace = false;
 			PScore();
 		} else if (stayOne) {
-			// int score = 0;
-			// System.out.println("dealer ace test");
-			for (int i = 0; i < hand; i++) {
+
+			while (i < hand && DAce) {// while
 				int value = Deck.getCard(DHand[i]).getvalue();
-				// score = value + score;
-				// if(score > 21) {
-				if (value == 11) {
+				if (value == 11) {// if
 					Deck.getCard(DHand[i]).setvalue(1);
 					DAce = false;
-				}
-				// }
-				DAce = false;
-			}
+				} // if
+				i++;
+			} // while
+			DAce = false;
 			DScore();
 		}
 	}
@@ -440,6 +436,12 @@ public class Game extends JFrame implements ActionListener {// opens class
 			win = "Player Wins greater";
 		} else if (Dealer > Player) {
 			win = "Dealer Wins greater";
+		}
+		else if(Dealer == Player) {
+			win = "Robert said PUSH!!";
+		}
+		else {
+			System.out.println("ERROR Winner");
 		}
 		if (Player == 21 && Dealer != 21) {
 			win = "Player Wins 21";
