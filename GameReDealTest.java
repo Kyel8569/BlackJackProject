@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
-public class Game extends JFrame implements ActionListener {// opens class
+public class GameReDealTest extends JFrame implements ActionListener {// opens class
 
 	Deck deck = new Deck();
 	int PHand[] = new int[Constants.getHCount()];
@@ -45,6 +45,7 @@ public class Game extends JFrame implements ActionListener {// opens class
 	JButton hit = new JButton();
 	JButton stay = new JButton();
 	JButton deal = new JButton();
+	JButton redeal = new JButton("•Redeal•");
 	int x;
 	int y;
 	static int c = 0;
@@ -69,7 +70,7 @@ public class Game extends JFrame implements ActionListener {// opens class
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Game window = new Game();
+					GameReDealTest window = new GameReDealTest();
 					window.frame.setVisible(true);
 					;
 				} catch (Exception e) {
@@ -80,7 +81,7 @@ public class Game extends JFrame implements ActionListener {// opens class
 
 	}// closes main
 
-	public Game() {// opens game
+	public GameReDealTest() {// opens game
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
@@ -106,6 +107,12 @@ public class Game extends JFrame implements ActionListener {// opens class
 		deal.setText("Deal");
 		deal.setFocusable(false);
 		frame.add(deal);
+		
+		redeal.setBounds(100, 20, 100, 50);
+		redeal.addActionListener(this);
+		redeal.setFocusable(false);
+		frame.add(redeal);
+		redeal.setVisible(false);
 
 		JLabel cardLabel1 = new JLabel("");
 
@@ -131,8 +138,8 @@ public class Game extends JFrame implements ActionListener {// opens class
 		DS.setBounds(10, 340, 100, 15);
 		frame.add(DS);
 		DS.setVisible(false);
-
-		testy.setBounds(300, 20, 1000, 50);
+		
+		testy.setBounds(300,20,1000,50);
 		testy.setText("BOBERT");
 		testy.setFont(new Font("Serif", Font.PLAIN, 55));
 		frame.add(testy);
@@ -199,8 +206,23 @@ public class Game extends JFrame implements ActionListener {// opens class
 			}
 			DScore();
 			Winner(PScore, DScore);
-
 		} // stay
+		if(e.getSource() == redeal) {
+			reset();
+			
+			stay.setVisible(true);
+			hit.setVisible(true);
+			deal.setVisible(false);
+			DOneCover.setVisible(true);
+			PCards(c);
+			c++;
+			PCards(c);
+			c++;
+			DCards(c);
+			c++;
+			DCards(c);
+			c++;
+		}
 
 	}// closes action listener
 
@@ -460,6 +482,53 @@ public class Game extends JFrame implements ActionListener {// opens class
 		DS.setText("Dealer Score: " + Dealer);
 
 		Winner.setText(win);
+		hit.setVisible(false);
+		stay.setVisible(false);
+		redeal.setVisible(true);
 	}
 
+	private void reset() {
+		PScore = 0;
+		DScore = 0;
+		DC1.setIcon(null);
+		DC2.setIcon(null);
+		PC1.setIcon(null);
+		PC2.setIcon(null);
+		PHit1.setIcon(null);
+		PHit2.setIcon(null);
+		PHit3.setIcon(null);
+		PHit4.setIcon(null);
+		PHit5.setIcon(null);
+		PHit6.setIcon(null);
+		PHit7.setIcon(null);
+		PHit8.setIcon(null);
+		PHit9.setIcon(null);
+		DHit1.setIcon(null);
+		DHit2.setIcon(null);
+		DHit3.setIcon(null);
+		DHit4.setIcon(null);
+		DHit5.setIcon(null);
+		DHit6.setIcon(null);
+		DHit7.setIcon(null);
+		DHit8.setIcon(null);
+		DHit9.setIcon(null);
+		Winner.setText("");
+		PS.setText("");
+		DS.setText("");
+		x = 0;
+		y = 0;
+		c = 0;
+		topCard = 0;
+		PC = 0;
+		DC = 0;
+		xx = 111;
+		yy = 211;
+		XX = 110;
+		YY = 111;
+		stayOne = false;
+		ace = false;
+		DAce = false;
+		bust = false;
+		deck = new Deck();
+	}
 }// closes class
