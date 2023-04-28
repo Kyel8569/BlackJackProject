@@ -212,6 +212,8 @@ public class GameReDealTest extends JFrame implements ActionListener {// opens c
 			
 			stay.setVisible(true);
 			hit.setVisible(true);
+			hit.setEnabled(true);
+			stay.setEnabled(true);
 			deal.setVisible(false);
 			DOneCover.setVisible(true);
 			PCards(c);
