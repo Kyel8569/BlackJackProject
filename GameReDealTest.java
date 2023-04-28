@@ -132,10 +132,10 @@ public class GameReDealTest extends JFrame implements ActionListener {// opens c
 		Winner.setBounds(10, 300, 400, 15);
 		frame.add(Winner);
 		Winner.setVisible(false);
-		PS.setBounds(10, 320, 100, 15);
+		PS.setBounds(10, 237, 100, 15);
 		frame.add(PS);
 		PS.setVisible(false);
-		DS.setBounds(10, 340, 100, 15);
+		DS.setBounds(10, 137, 100, 15);
 		frame.add(DS);
 		DS.setVisible(false);
 		
